@@ -3,11 +3,10 @@ const db = require("./utils/database")
 
 const { port } = require("./config")
 
-const app = express()
-
 const userRouter = require("./users/users.router")
 const authRouter = require("./auth/auth.router")
 
+const app = express()
 
 app.use(express.json())
 

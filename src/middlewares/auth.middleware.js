@@ -6,7 +6,6 @@
 
 // Las estrateguas son las diferentes maneras de hacer un login
 
-const passport = require("passport")
 const { jwtSecret } = require("../config")
 const { getUserById } = require("../users/users.controllers")
 
@@ -19,13 +18,14 @@ module.exports = (passport) => {
         secretOrKey: jwtSecret
     }
     passport.use(
-        new JwtStrategy(options, async (decoded, done) => {
+        new JwtStrategy(options, async (decoded, done) => { //Opcions and callback
             try {
                 const response = await getUserById(decoded.id)
                 if(!response) {
                     return done(null, false)
                 }
                 console.log("decoded JWT", decoded)
+                return done(null, decoded)
             } catch (error) {
                 return done(error, false)
             }

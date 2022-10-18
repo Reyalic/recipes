@@ -2,7 +2,7 @@ const usersControllers = require("./users.controllers")
 
 const getAllUsers = (req, res) => {
     usersControllers.getAllUsers()
-        .then((response) => {
+        .then((data) => {
             res.status(200).json(data)
         })
         .catch((err) => {
@@ -87,8 +87,8 @@ const deleteUser = (req, res) => {
 }
 
 const getMyUser = (req, res) => {
-    const data = req.user.id
-    
+    const id = req.user.id
+    console.log("first", id)
     usersControllers.getUserById(id)
         .then(data => {
                 res.status(200).json(data)
@@ -103,11 +103,7 @@ const updateMyUser = (req, res) => {
     const { firstName, lastName, phone, gender, country } = req.body 
         usersControllers.updateUser(id, { firstName, lastName, phone, gender, country })
             .then(data => {
-                if(data[0]){
-                    res.status(200).json({message: `User by id: ${id} edited succesfull `})
-                } else {
-                    res.status(404).json({message: 'Invalid ID'})
-                }
+                res.status(200).json({message: "User edited successfully!" })
             })
             .catch(err => {res.status(400).json({message: err.message})})
 }

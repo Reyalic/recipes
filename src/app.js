@@ -5,6 +5,7 @@ const { port } = require("./config")
 
 const userRouter = require("./users/users.router")
 const authRouter = require("./auth/auth.router")
+const initModels = require("./models/initModels")
 
 const app = express()
 
@@ -25,6 +26,8 @@ db.sync()
     .catch(err => {
         console.log(err)
     })
+
+initModels()
 
 app.get("/", (req, res) => {
     res.status(200).json({

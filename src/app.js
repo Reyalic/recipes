@@ -9,6 +9,10 @@ const categoryRouter = require("./categories/categories.router")
 const typeRouter = require("./types/types.router")
 const ingredientRouter = require("./ingredients/ingredients.router")
 const recipeRouter = require("./recipes/recipes.router")
+const instructionRouter = require("./instructions/instructions.router")
+const recipeIngRouter = require("./recipe_ingredients/recipe_ingredients.router")
+const userRecipeRouter = require("./users_recipes/user_recipes.router")
+const userIngredientRouter = require("./user_ingredients/user_ingredients.router")
 
 const initModels = require("./models/initModels")
 
@@ -47,6 +51,10 @@ app.use("/api/v1/categories", categoryRouter)
 app.use("/api/v1/types", typeRouter)
 app.use("/api/v1/ingredients", ingredientRouter)
 app.use("/api/v1/recipes", recipeRouter)
+app.use("/api/v1/recipes/:id/instructions", instructionRouter)
+app.use("/api/v1/recipes/:id/ingredients", recipeIngRouter)
+app.use("/api/v1/user/recipes", userRecipeRouter)
+app.use("/api/v1/user/ingredients", userIngredientRouter)
 
 app.listen(port, () => {
     console.log(`Listening at ${port}` )
